@@ -1,6 +1,6 @@
 Traditional financial markets have little room for creative approaches. When market participants transact, buyer and sellers must meet at a common price. 
 Without getting too technical, institutions give retail traders the ability to transact instantly by charging them premiums in the form of bid/ask spreads,
-a built in fee that is nearly impossible to overcome for frequent traders. 
+a built in fee that is nearly impossible to overcome for frequent traders. \n
 This platform gives users an interface to track real asset prices and make buy/sell transaction "on paper". This removes the need to cross the spread,
 as well as any other regulations related to change in ownership of assets. This system does not allow for the traditional methods of capturing a profit, since
 no asset is being bought or sold. Instead, the performance of the user is tracked by the platform and they are placed on a leaderboard. 
