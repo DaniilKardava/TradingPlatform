@@ -1,8 +1,7 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
-from os import path
-from flask_login import LoginManager
 
+# Create sql database. Function below will check if database with this name exists, if not, it will create it.
 db = SQLAlchemy()
 DB_NAME = "database.db"
 
@@ -13,9 +12,10 @@ def create_app():
     app.config["SQLALCHEMY_DATABASE_URI"] = f'sqlite:///{DB_NAME}'
     db.init_app(app)
 
-    # from file import variables
+    # from views file import variable views
     from .views import views
 
+    # Syntax to create database
     with app.app_context():
         db.create_all()
 
