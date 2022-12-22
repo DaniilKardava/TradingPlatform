@@ -1,11 +1,4 @@
 from website import create_app
-from subprocess import Popen
-
-
-def run_server():
-    server = Popen(['node', 'serverSideData.js'])
-    return server
-
 
 app = create_app()
 
