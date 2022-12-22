@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <!--Pad the top of the page because of a fixed nav bar-->
+        <style>
+            html{
+                scroll-behavior: smooth;
+            }
+            body {
+                padding-top: 2.7vw; 
+            }
+        </style>"
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <!--Bootstrap style links-->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+            integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous" />
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+            crossorigin="anonymous" />
+        <link type = "text/css" rel="stylesheet" href={{ url_for('static',filename='cssCode/onboardingDesign.css') }} />
+        <title>{% block title %}Onboarding{% endblock %}</title>
+    </head>
+    
+    
+    <body>
+        
+        <div>
+            <nav class="navbar navbar-expand-lg navbar-dark fixed-top" style="background-color: rgb(50, 50, 50);" >
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <a class="navbar-brand" style="font-family: 'Times New Roman', Times, serif; font-size:2.5vw; color:rgb(255,255,255); margin-top: -.3vw"  href="/">W3T</a>
+                
+                
+                <div class="collapse navbar-collapse" id="navbar">
+                    <div class="navbar-nav">
+                        <a class="nav-item nav-link" style="font-family: 'Times New Roman', Times, serif; padding:1vw; font-size:1.7vw; font-weight:500; color:rgb(255,255,255)" href="/">Home</a>
+                        <a class="nav-item nav-link" style="font-family: 'Times New Roman', Times, serif; padding:1vw; font-size:1.7vw; font-weight:500; color:rgb(255,255,255)" href="/leaderboard">Top Performers</a>
+                        <a class="nav-item nav-link" style="font-family: 'Times New Roman', Times, serif; padding:1vw; font-size:1.7vw; font-weight:500; color:rgb(255,255,255)" href="/tradeStation">TradeStation</a>
+                    </div>
+                </div>
+                
+                <button type="button" id="walletConnect" name = "walletConnect" class="btn btn-dark btn-sq-responsive">Connect Wallet</button>
+
+                <div id="modal" class="modal" style="display: none; position:absolute; top:100%">
+                    <div class="modal-content" style="background-color: rgba(255,0,0,.8); color:white; font-size: 1.5vw; font-family: 'Times New Roman', Times, serif; padding:.3vw; height: 3vw; width: 100vw;">
+                            <p style = "text-align: left; width:100vw; padding-left: 1%;">Browser does not contain MetaMask extension. <button onclick= "dismissMMalert()" style="background-color: rgba(0,0,0,0); border: 0px;  color:white; margin-left: 65%; ">&times;</button></p>
+                            
+                    </div>
+                </div>
+
+                <script>
+                    const button = document.getElementById("walletConnect");
+                        
+                    button.addEventListener("click", async () => {
+                        if (typeof window.ethereum !== "undefined") {
+                            console.log("connected");
+                            // Request access to the user's Ethereum accounts
+                            try {
+                                await window.ethereum.send("eth_requestAccounts");
+                            } catch (error) {
+                                console.error(error);
+                                return;
+                            }
+                        
+                            // Create a Web3 object
+                            const web3 = new Web3(window.ethereum);
+                        
+                            // Get the user's Ethereum address
+                            const accounts = await web3.eth.getAccounts();
+                            const userAddress = accounts[0];
+
+                            console.log(accounts)
+                            console.log(userAddress)
+                        
+                            // Use the user's Ethereum address to interact with the Ethereum blockchain
+                            // ...
+                        } else {
+                            console.log("not connected")
+                            // flash warning
+                            const modal = document.getElementById("modal");
+                            modal.style.display = "block";
+
+                        }
+                        
+                    });
+
+                    //Dismiss alert with X
+                    function dismissMMalert(){
+                        var metamaskAlert = document.getElementById("modal");
+                        metamaskAlert.style.display = "none";
+                    }
+                  </script>
+                
+
+            </nav>
+        </div>
+        
+
+        
+        <div style="background-color:rgb(12, 10, 9)">
+            <br/>
+            <div class = "mainTitle" style = "text-align: center; font-size: 5.5vw; color: rgb(255, 255, 255);font-weight: 700; font-family: 'Times New Roman', Times, serif;">W3T Protocol</div>
+            <br/>
+            <div style="margin: auto; margin-left:7vw;">
+                <div class = "fade-in" style = "font-family: 'Times New Roman', Times, serif; position:relative; animation-name: FirstSlideIn; animation-duration: 3s; left:1vw; font-size: 4.5vw; font-weight: 700; color:rgb(255,255,255)">Trade <span style="color:rgb(245, 167, 167)">real</span> securities</div>
+                <div class = "fade-in" style = "font-family: 'Times New Roman', Times, serif; position:relative; animation-name: SecondSlideIn; animation-duration: 4s; left:22vw; font-size: 4.5vw;color:rgb(255, 255, 255); font-weight: 700;">Earn real <span style="color:rgb(245, 167, 167)">profits</span></div>
+                <div class = "fade-in" style = "font-family: 'Times New Roman', Times, serif; position:relative; left:40vw; font-size: 4.5vw;color:rgb(255,255,255); font-weight: 700;">...with <em><span style="font-weight:1500; font-size: 5vw;color:rgb(245, 167, 167)">0</span></em> downside <span style="color:rgb(245, 167, 167)">risk</span></div>
+            </div>
+            <br/>
+            <br/>
+            <br/>
+            <button type="button" class = "connectWalletButton ">Connect and Deposit</button>
+            <br/>
+            <div class = "tripleDashSlogan" style = "text-align: center; margin: auto; font-size: 2.8vw; color: rgb(255, 255, 255);font-weight: 700; font-family: 'Times New Roman', Times, serif;">Test your strategies - Demonstrate your abilities - Get found by clients</div>
+            <br/>
+        </div>
+
+
+        <div style = "background-color: rgb(15, 18, 18); overflow: auto;">
+            <div style="float: left;">
+                <ul style="width:70vw; color: rgb(238, 238, 238); position:relative;margin:2vw; font-family: 'Times New Roman', Times, serif; text-align:left">
+                    <span class = "OurGoal" style="font-weight:bold;">Our Goal:</span>
+                    
+                    <li class = "OurGoalText" style="margin-top: 2vh; font-weight: 600; ">
+                        Web3 Trading wants to redefine how we profit in financial markets. We give traders the ability to transact in a perfect environment, without the restrictions imposed by traditional markets, so that truly genius trading systems can clash head to head.
+                    </li>
+                    
+                    <li class = "OurGoalText" style="margin-top: 2vh; font-weight: 600; ">
+                        Learn more about our Minor-League, where traders can hone their skills and earn profits without risking any losses, and our Major-League, where traders fight to walk away with fortunes.
+                    </li>
+                
+                </ul>
+
+                <!--<p style="color: rgb(0, 0, 0); font-size: 6vw; text-align: center;">&#10551;</p>-->
+
+            </div>
+            
+
+            
+
+            <div style="float: right;">
+                
+                <ul style="width:50vw; color: rgb(238, 238, 238); position:relative;margin:2vw; font-family: 'Times New Roman', Times, serif; text-align:left">
+                    <span class = "OurMethod" style="font-weight:bold; font-size: 2.5vw;">Methodology:</span>
+
+                    <li class = "OurMethodText" style="margin-top: 2vw; font-weight: 600;">
+                        The Minor-League: Every participant enters by staking funds for the duration of the trading season. The public prize pool earns interest on the blockchain, 
+                        while participants use our interface to execute simulated trades and grow their portfolio. Visit the leaderboard page to see the seasonal prize 
+                        distributions and the all-time leaderboard perks. 
+                    </li>
+
+                    <li class = "OurMethodText" style="margin-top: 2vw; font-weight: 600;">
+                        The Major-League: When you're ready, you may compete for a larger prize in a pool that is 
+                        fully redistributed among the best. To earn a spot here, you'll first have to prove yourself in the Minor-League.
+                    </li>
+                </ul>
+            </div>
+
+            <div style="float: left;">
+
+                <ul style="color: rgb(238, 238, 238); width:70vw; position:relative; margin:2.5vw; 
+                font-family: 'Times New Roman', Times, serif; text-align:left; font-weight:bold">
+
+                    <span class= "PlatformFeatures" style = "font-weight:bold">Platform features:</span>
+                    <br/>
+                    <li class = "PlatformFeaturesText" style="font-weight:600">
+                        Our platform provides real-time prices for a handful of the largest securities in the world. 
+                    </li>
+                    <li class = "PlatformFeaturesText" style="font-weight:600">
+                        We allow you to execute your trades in a simulation, just as you would in the real markets, to grow your portfolio and
+                        win recurring prizes.
+                    </li>
+                    <li class = "PlatformFeaturesText" style="font-weight:600">
+                        You can find any user's performance statistics by searching for their wallet address on the leaderboard page. 
+                    </li>
+
+                </ul> 
+
+            </div>
+        </div>
+        
+        <br/>
+        <footer>
+            <div class="container">
+              <div class="row">
+                <div class="col-md-3">
+                  <h3>About Us</h3>
+                  <p>Insert information about your crypto currency protocol here.</p>
+                </div>
+                <div class="col-md-3">
+                  <h3>Contact Us</h3>
+                  <ul>
+                    <li>Email: info@cryptocurrencyprotocol.com</li>
+                    <li>Phone: 555-555-5555</li>
+                  </ul>
+                </div>
+                <div class="col-md-3">
+                  <h3>Links</h3>
+                  <ul>
+                    <li><a href="#">Link 1</a></li>
+                    <li><a href="#">Link 2</a></li>
+                    <li><a href="#">Link 3</a></li>
+                  </ul>
+                </div>
+                <div class="col-md-3">
+                  <h3>Social Media</h3>
+                  <ul>
+                    <li><a href="#">Facebook</a></li>
+                    <li><a href="#">Twitter</a></li>
+                    <li><a href="#">LinkedIn</a></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </footer>
+        
+
+    
+        <!--Bootstrap js links-->
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+    </body>
+    
+</html>

@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <!--Bootstrap style links-->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+            integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous" />
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+            crossorigin="anonymous" />
+        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/web3@1.3.0/dist/web3.min.js"></script>
+        <script src="https://unpkg.com/chroma-js@2.4.2/chroma.js"></script>
+
+
+        <link type = "text/css" rel="stylesheet" href={{ url_for('static',filename='cssCode/onboardingDesign.css') }} />
+
+        <title>{% block title %}TradeStation{% endblock %}</title>
+
+        <style>
+            html{
+                scroll-behavior: smooth;
+            }
+            body {
+                padding-top: 5vw;
+                margin:auto;
+            }
+        </style>
+
+        <link type = "text/css" rel="stylesheet" href={{ url_for('static',filename='cssCode/tradeStationDesign1401-.css') }} />
+        <link type = "text/css" rel="stylesheet" href={{ url_for('static',filename='cssCode/tradeStationDesign1201-1400.css') }} />
+        <link type = "text/css" rel="stylesheet" href={{ url_for('static',filename='cssCode/tradeStationDesign901-1200.css') }} />
+        <link type = "text/css" rel="stylesheet" href={{ url_for('static',filename='cssCode/tradeStationDesign701-900.css') }} />
+
+        <script src="https://unpkg.com/lightweight-charts/dist/lightweight-charts.standalone.production.js"></script>
+
+    </head>
+
+    <body>
+        <script>
+            (() =>{
+                const web3 = new Web3(window.ethereum);
+                // Check if user disconnects and refresh the page
+                web3.currentProvider.on('accountsChanged', function(error) {
+                    location.reload();
+                });
+            })();
+        </script>
+
+        <div>
+            <nav class="navbar navbar-expand-lg navbar-dark fixed-top" style="background-color: rgb(50, 50, 50);" >
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <a class="navbar-brand" style="font-family: 'Times New Roman', Times, serif; font-size:2.5vw; color:rgb(255,255,255); margin-top: -.3vw"  href="/">W3T</a>
+                
+                
+                <div class="collapse navbar-collapse" id="navbar">
+                    <div class="navbar-nav">
+                        <a class="nav-item nav-link" style="font-family: 'Times New Roman', Times, serif; padding:1vw; font-size:1.7vw; font-weight:500; color:rgb(255,255,255)" href="/">Home</a>
+                        <a class="nav-item nav-link" style="font-family: 'Times New Roman', Times, serif; padding:1vw; font-size:1.7vw; font-weight:500; color:rgb(255,255,255)" href="/leaderboard">Top Performers</a>
+                        <a class="nav-item nav-link" style="font-family: 'Times New Roman', Times, serif; padding:1vw; font-size:1.7vw; font-weight:500; color:rgb(255,255,255)" href="/tradeStation">TradeStation</a>
+                    </div>
+                </div>
+                
+                <!--Close modal alert-->
+                <script>
+                    //Dismiss alert with X
+                    function dismissModalAlert(){
+                        var modalAlert = document.getElementById("modal");
+                        modalAlert.style.display = "none";
+                    }
+                </script>
+
+                
+                <button type="button" id="walletConnect" name = "walletConnect" class="btn btn-dark btn-sq-responsive">Connect Wallet</button>
+
+                <div id="modal" class="modal" style="display: none; position:absolute; top:100%">
+                        <div id = "modalMessage" name = "modalMessage" style = "font-family: 'Times New Roman', Times, serif; font-size: 1.3vw; color:white; text-align: left; padding-left: 1%;">
+                            Browser does not have MetaMask extension installed. <button onclick= "dismissModalAlert()" style="background-color: rgba(0,0,0,0); border: 0px; color:white; position:absolute; right: 5vw; ">&times;</button>
+                        </div>    
+                </div>                    
+            </nav>
+        </div>
+
+        
+
+        <div style = "background-color: black; font-family: 'Times New Roman', Times, serif;">
+            <br/>
+            <div id="firstRow" name = "firstRow" style="display: flex; flex-direction: row; align-items: center;">
+                <br/>
+                
+                <!--create reference tag for scripts to get the passed list. Convert list to easy string form and use split(" ") in script-->
+                <div id = "storedValue" value = "{{assetList|join(' ')}}"></div>
+
+                <!--Make searchbox text resize with box-->
+                
+                <style>
+                    .disable-scrollbars::-webkit-scrollbar {
+                        background: transparent; /* Chrome/Safari/Webkit */
+                        width: 0px;
+                    }
+                            
+                    .disable-scrollbars {
+                        scrollbar-width: none; /* Firefox */
+                        -ms-overflow-style: none;  /* IE 10+ */
+                    }
+
+                </style>
+
+                <div style="position:relative;">
+                    <input type = "text" id = "searchBox" name = "searchBox" placeholder="Search for a crypto asset..." >  
+                    <div id = "availableAssets" name = "availableAssets" class="disable-scrollbars" style="overflow: scroll; max-height: 5vw;">
+                        
+                        {% for asset in assetList %}
+                            <form method="POST">
+                                <input type="hidden" id="assetSearchRequest" name="assetSearchRequest">
+                                <button type="submit" class="link-button searchResults" id={{asset}} name = {{asset}} style="display: none;">{{asset}}</a>
+                            </form>
+                        {% endfor %}  
+                        
+                    </div>     
+                </div>
+                
+                <script>
+                    var assetList = document.getElementById("storedValue").getAttribute("value").split(" ");
+                    var dropDown = document.getElementById("availableAssets");
+                    var textBox = document.getElementById("searchBox");
+                    textBox.addEventListener("keyup", () => {
+                        var input = (textBox.value).toUpperCase();
+                        var numberDisplayed = 0;
+
+                        for (var i = 0; i < assetList.length; i++){
+                            if (input.length != 0 && assetList[i].slice(0,input.length) == input){
+                                console.log(assetList[i]);
+                                document.getElementById(assetList[i]).style.display = "block";
+                                if (numberDisplayed  % 2 == 0) {
+                                    document.getElementById(assetList[i]).style.background = "#BCBCBC";
+                                } else {
+                                    document.getElementById(assetList[i]).style.background = "#ECECEC";
+                                }
+                                numberDisplayed += 1;
+                            } else {
+                                document.getElementById(assetList[i]).style.display = "none";
+                            }
+                        }
+                        
+                    })
+
+                </script>
+
+                <div id = "tradeTitle" name = "tradeTitle" >TradeStation</div>
+            </div>
+            <br/>
+            <br/>
+
+            <div id = "secondRow" name="secondRow" style="display: flex; flex-direction: row; align-items: center; ">
+                <div id = "executionBox" name="executionBox" style="display: flex; flex-direction: column;">
+                    <div id = "executionBoxInformation" name = "executionBoxInformation">
+                        <div id = "buyingPower" name = "buyingPower">Buying Power: </div>
+                        <div id = "qtyOwned" name = "qtyOwned">{{assetName}} Owned: </div>
+                        <div id = "avgCost" name = "avgCost">Average Cost: </div>
+                    </div>
+
+                    <!-- Display order details depending on selected item from dropdown-->
+                    <script>
+                        function showDiv() {
+                            var select = document.getElementById("orderSelect");
+                            var placeOrder = document.getElementById("orderButtonDiv");
+                            var buy_sell_Buttons = document.getElementById("buy_sell_Buttons");
+                            var lmtPriceForm = document.getElementById("lmtPriceFormDiv");
+                            if (select.value == "Market" || select.value == "Limit") {
+                                buy_sell_Buttons.style.display = "flex";
+                                placeOrder.style.display = "none";
+                                if (select.value == "Market"){
+                                    lmtPriceForm.style.display = "none";
+                                } else {
+                                    lmtPriceForm.style.display = "block";
+                                }
+                            } else {
+                                buy_sell_Buttons.style.display = "none";
+                                placeOrder.style.display = "block";
+                                lmtPriceForm.style.display = "block";
+                            }
+                        }
+                    </script>
+
+                    <div id ="tradeExecutionButtonsDiv" name="tradeExecutionButtonsDiv" style = "display: flex; flex-direction: column;">
+                        
+                        <label for="orders" id = "orderTypeTitle" name="orderTypeTitle">Select order type:</label>
+
+                        <select onchange="showDiv()" name="orderSelect" id="orderSelect">
+                            <option value="Market">Market</option>
+                            <option value="Limit">Limit</option>
+                            <option value="StopLoss">Stop Loss</option>
+                            <option value="TakeProfit">Take Profit</option>
+                        </select>
+                        
+                        <!--Remove the arrows in the input box that include step attribute-->
+                        <style>
+                            /* Chrome, Safari, Edge, Opera */
+                            .noStepArrow::-webkit-outer-spin-button,
+                            .noStepArrow::-webkit-inner-spin-button {
+                                -webkit-appearance: none;
+                                margin: 0;
+                            }
+
+                            /* Firefox */
+                            .noStepArrow[type=number] {
+                                -moz-appearance: textfield;
+                            }
+                        </style>
+
+                        <form method="POST" onsubmit="return validInput()">
+
+                            <div id="qtyFormDiv" name="qtyFormDiv">
+
+                                    <label for="QTY" id= "QTYtitle" name= "QTYtitle">Quantity:</label>
+                                    <input class="noStepArrow" name = "QTY" id = "QTY" type = "number" step="0.001" placeholder="Enter quantity...">
+                                
+                            </div>
+
+                        
+                            <div id = "lmtPriceFormDiv" name ="lmtPriceFormDiv" style = "display: none">
+                                
+                                    <label for="lmtPrice" id = "lmtPriceTitle" name = "lmtPriceTitle">Limit Price:</label>
+                                    <input class="noStepArrow" name = "lmtPriceInput" id = "lmtPriceInput" type = "number" step="0.01" placeholder="Enter limit price...">
+                                
+                            </div> 
+                            
+
+                            <div id = "buy_sell_Buttons" name = "buy_sell_Buttons" style = "position:relative;  display: flex; flex-direction: row; font-family: 'Times New Roman', Times, serif;">  
+                                <button type="submit" id = "buyButton" name = "buyButton">Buy</button>
+                                <button type="submit" id = "sellButton" name = "sellButton">Sell</button>
+                                <input type="hidden" id="userAddress" name="userAddress">
+                                <input type="hidden" id="assetTransacted" name="assetTransacted" value = {{assetName}}>
+                            </div>
+
+                            <div id = "orderButtonDiv" name = "orderButtonDiv" style = "text-align: center; display: none">
+                                <button type="submit" id = "stopLoss_takeProfit" name = "stopLoss_takeProfit" >Place Order</button>
+                            </div>
+                            
+                        </form> 
+
+                        <script>
+                            var qtyInput = document.getElementById("QTY");
+                            var limitPriceDiv = document.getElementById("lmtPriceFormDiv");
+                            var limitPrice = document.getElementById("lmtPriceInput");
+                            var flashMessage = document.getElementById("modal");
+                            var flashMessageContent = document.getElementById("modalMessage");
+
+                            function checkAmount() {
+                                if (qtyInput.value == "" || qtyInput.value < 0) {
+                                    flashMessageContent.style.background =  "rgba(255,0,0,.8)";
+                                    flashMessageContent.innerHTML = "Quantity must be positive. <button onclick= 'dismissModalAlert()' style='background-color: rgba(0,0,0,0); border: 0px; color:white; position:absolute; right: 5vw;'>&times;</button>";
+                                    flashMessage.style.display = "block";
+                                    return false;
+                                } 
+                                if (limitPriceDiv.style.display != "none") {
+                                    if (limitPrice.value == "" || limitPrice.value < 0) {
+                                        flashMessageContent.style.background =  "rgba(255,0,0,.8)";
+                                        flashMessageContent.innerHTML = "Limit price must be positive. <button onclick= 'dismissModalAlert()' style='background-color: rgba(0,0,0,0); border: 0px; color:white; position:absolute; right: 5vw;'>&times;</button>";
+                                        flashMessage.style.display = "block";
+                                        return false;
+                                    }
+                                }
+                                return true;
+                            }
+                            function checkUser() {
+                                var userAddress = document.getElementById("userAddress");
+                                if (userAddress.value == "") {
+                                    flashMessageContent.style.background =  "rgba(255,0,0,.8)";
+                                    flashMessageContent.innerHTML = "User must connect a wallet. <button onclick= 'dismissModalAlert()' style='background-color: rgba(0,0,0,0); border: 0px; color:white; position:absolute; right: 5vw;'>&times;</button>";
+                                    flashMessage.style.display = "block";
+                                    return false;
+                                }
+                                return true;
+                            }
+
+                            function validInput(){
+                                return (checkUser() && checkAmount());
+                            }
+
+                        </script>
+
+                        
+
+                    </div>
+                </div>
+                <div id="liveChart" name="liveChart"></div>
+            </div>
+
+            <!--Style all the timeframe buttons-->
+            <style>
+                #timeframeButtons button {
+                    width:3vw;
+                    height:2vw;
+                    font-family: 'Times New Roman', Times, serif;
+                    font-size: 1vw;
+                    background-color: white;
+                }
+            </style>
+
+            <div id="timeframeButtons" currentTimeFrame = {{timeframe}} style="display:flex; flex-direction:row; background-color: rgb(0, 0, 0);position: relative; left:30vw">
+                <form method="POST">
+                    <!--I gave all the buttons a value so that I can identify the post request origin-->
+                    <button type="submit" id = "1mTimeFrame" name="1mTimeFrame" for="liveChart" >1m</button>
+                    <button type="submit" id = "5mTimeFrame" name="5mTimeFrame" for="liveChart" >5m</button>
+                    <button type="submit" id = "15mTimeFrame" name="15mTimeFrame" for="liveChart" >15m</button>
+                    <button type="submit" id = "1hTimeFrame" name="1hTimeFrame" for="liveChart" >1h</button>
+                    <button type="submit" id = "6hTimeFrame" name="6hTimeFrame" for="liveChart" >6h</button>
+                    <button type="submit" id = "1dTimeFrame" name="1dTimeFrame" for="liveChart" >1d</button>
+                </form>
+            </div>
+
+            <script>
+                //Set style of current time frame button:
+                var currentTimeFrame = document.getElementById("timeframeButtons").getAttribute("currentTimeFrame");
+                console.log(currentTimeFrame);
+                var timeFrameButton = document.getElementById(currentTimeFrame);
+                timeFrameButton.style.background = "rgba(200,200,200,1)";
+                timeFrameButton.disabled = true;
+            </script>
+
+        </div>
+
+
+
+        <!--Supposedly this prevents legend from flickering when hovering over the pie chart-->
+        <style>
+            svg > g > g.google-visualization-tooltip { pointer-events: none }
+        </style>
+        
+        <style>
+            #tradeLogTable th, #tradeLogTable td {
+                border: .1vw solid #dddddd;
+                text-align: left;
+                padding-right: 5.5vw;
+                padding-left: .5vw;
+            }
+            #tradeLogTable tr {
+                color:white;
+            }
+
+            #tradeLogTable tr:nth-child(even) {
+                background-color:rgb(78, 78, 78);
+            }
+
+            #tradeLogTable tr:nth-child(odd) {
+                background-color:rgb(107, 107, 107);
+            }
+            
+
+        </style>
+        <div style = "position:relative; background-color: black; font-family: 'Times New Roman', Times, serif; font-weight:500">
+            <br/>
+            <br/>
+            <div style = "position:relative; margin-left: 1vw; left: 5vw; font-size: 3.5vw; color: white;">Portfolio Statistics:</div>
+            <br/>
+            <div style = "position:relative; display:flex; flex-direction: row;">
+                <div style = "flex-direction: column; text-align: center;">
+                    <div style = "position:relative;  font-size: 2.5vw; color: white;">Portfolio Composition</div>
+                    <div id="piechart" style = "position: relative; margin-top: -5vw; text-align: left; width: 40vw; height: 40vw; "></div>
+                </div>
+                <div  id  = "tradeTableDiv" style="text-align: center; position: relative; left:5vw">
+                    <label for="tradeLogTable" style = " position:relative; font-size: 2.5vw; color: white;">Trade Log</label>
+                    <table id = "tradeLogTable" name = "tradeLogTable" class = "tradeLogTable" style = "font-family: 'Times New Roman', Times, serif; font-size: 1vw;">
+                        <tr>
+                            <th>Date</th>
+                            <th>Side</th>
+                            <th>Asset</th>
+                            <th>Amount</th>
+                            <th>Price</th>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div style = "background-color: black; color:white; font-family: 'Times New Roman', Times, serif; text-align: center; ">
+            <div style = "font-size: 3vw; ">Performance</div>
+            <br/>
+            <div id = "histChart" style=" position: relative; margin:auto; height: 40vw; width:95%"></div>
+            <br/>
+            <br/>
+        </div>
+        
+        <br/>
+        <footer>
+            <div class="container">
+              <div class="row">
+                <div class="col-md-3">
+                  <h3>About Us</h3>
+                  <p>Insert information about your crypto currency protocol here.</p>
+                </div>
+                <div class="col-md-3">
+                  <h3>Contact Us</h3>
+                  <ul>
+                    <li>Email: info@cryptocurrencyprotocol.com</li>
+                    <li>Phone: 555-555-5555</li>
+                  </ul>
+                </div>
+                <div class="col-md-3">
+                  <h3>Links</h3>
+                  <ul>
+                    <li><a href="#">Link 1</a></li>
+                    <li><a href="#">Link 2</a></li>
+                    <li><a href="#">Link 3</a></li>
+                  </ul>
+                </div>
+                <div class="col-md-3">
+                  <h3>Social Media</h3>
+                  <ul>
+                    <li><a href="#">Facebook</a></li>
+                    <li><a href="#">Twitter</a></li>
+                    <li><a href="#">LinkedIn</a></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </footer>
+
+        <!-- js links-->
+        <script src="/static/jsCode/pieChartJS.js" type="module"></script>
+
+        <script src="/static/jsCode/metamaskConnection.js", assetName = {{assetName}} id = "metamaskConnection" type="module"></script>
+
+        <script src="/static/jsCode/liveDataChart.js" assetName = {{assetName}} id = "liveDataChartScript"></script>
+        <script src="/static/jsCode/historicalPerformanceChart.js" id = "hist_perf_chart" type="module"></script>
+
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+    </body>
+</html>

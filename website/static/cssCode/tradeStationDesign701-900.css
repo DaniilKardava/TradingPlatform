@@ -1,0 +1,145 @@
+@media (min-width: 701px) and (max-width: 900px){
+    /* Searchbox*/
+    #searchBox {
+        margin-left: 5vw;
+        height: 3vw;
+        width: 25vw;
+        font-size: 1.5vw;
+    }
+    #searchBox:placeholder-shown {
+        font-size: 1.5vw;
+    }
+    /* Search results*/
+    .searchResults {
+        margin-left: 5vw;
+        height: 3vw;
+        width: 25vw;
+        background-color:rgb(142, 142, 142);
+        color:black;
+        font-size: 1.3vw;
+        text-align: left;
+        border: 1px solid black;
+    }
+
+    /* Title */
+    #tradeTitle{
+        margin-left: 15vw;
+        font-size: 8vw;
+        color:pink;
+    }
+
+    #firstRow{
+        margin-top: 0vw;
+    }
+
+    #secondRow {
+        margin-top: -5vw;
+    }
+
+    #executionBox{
+        padding:1vw;
+        color:rgb(255, 255, 255);
+        background-color: rgb(0, 0, 0);
+        position:relative;
+        left: 5vw;
+        width:20vw;
+    }
+
+    #executionBoxInformation {
+        font-size: 2vw;
+    }
+
+    #tradeExecutionButtonsDiv{
+        position:relative;
+        margin-top:2vw;
+    }
+
+    #orderTypeTitle{
+        font-size: 2vw;
+
+    }
+
+    #orderSelect{
+        font-size: 2vw;
+    }
+
+    #qtyFormDiv{
+        margin-top:1vw;
+    }
+
+    #QTYtitle{
+        font-size: 2vw;
+    }
+
+    #QTY {
+        position:relative;
+        padding-left: .5vw;
+        font-size: 2vw;
+        height: 3vw;
+        width: 85%;
+    }
+
+    #lmtPriceFormDiv {
+        margin-top:1.5vw;
+    }
+
+    #lmtPriceTitle {
+        font-size: 2vw;
+    }
+
+    #lmtPriceInput {
+        position:relative;
+        padding-left: .5vw;
+        font-size: 2vw;
+        height: 3vw;
+        width: 85%;
+
+    }
+
+    #buy_sell_Buttons {
+        margin-top:2vw;
+    }
+
+    #buyButton {
+        background-color: rgba(0,255,0,.4);
+        height:3.7vw;
+        width: 15vw; 
+        color: white;
+        font-size: 2vw;
+        margin:auto;
+        justify-content: center;
+        border:1px solid black;
+    }
+
+    #sellButton {
+        background-color: rgba(255,0,0,.7);
+        height:3.7vw;
+        width: 15vw; 
+        color: white;
+        font-size: 2vw;
+        margin:auto;
+        justify-content: center; 
+        border: 1px solid black;
+    }
+
+    #orderButtonDiv {
+        margin-top:2vw;
+    }
+
+    #stopLoss_takeProfit {
+        background-color: rgb(243, 222, 145); 
+        height:3.7vw; 
+        width: 20vw; 
+        color: rgb(0, 0, 0);
+        font-size: 2vw;
+    }
+
+    #liveChart {
+        position: relative;
+        float:right; 
+        left:13vw; 
+        height: 45vw; 
+        width:63vw;
+    }
+
+}

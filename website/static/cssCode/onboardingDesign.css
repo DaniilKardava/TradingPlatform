@@ -1,0 +1,310 @@
+@keyframes FirstSlideIn{
+    0% {left:45vw; opacity: 0}
+    100% {left:1vw; opacity: 1}
+
+}
+
+@keyframes SecondSlideIn{
+    0% {left:60vw; opacity: 0}
+    50% {left:50vw; opacity: 0}
+    100% {left:22vw; opacity:1}
+
+}
+
+.navbar-height{
+    height:10%;
+}
+
+html, body {
+width: 100%;
+height:100%;
+}
+
+
+body {
+    overflow-x: hidden; /* Hide horizontal scrollbar */
+  }
+
+
+/* Make sliding elements responsive */ 
+
+@media (max-width: 600px) {
+.fade-in {
+    font-size: 45px;
+    left: 10px;
+    margin-top: 15px;
+    animation: fadeIn ease 5s;
+    -webkit-animation: fadeIn ease 5s;
+    -moz-animation: fadeIn ease 5s;
+    -o-animation: fadeIn ease 5s;
+    -ms-animation: fadeIn ease 5s;
+}
+}
+
+@media (min-width: 601px) and (max-width: 1200px) {
+    .fade-in {
+        font-size: 27px;
+        left: 6px;
+        margin-top: 15px;
+        animation: fadeIn ease 5s;
+        -webkit-animation: fadeIn ease 5s;
+        -moz-animation: fadeIn ease 5s;
+        -o-animation: fadeIn ease 5s;
+        -ms-animation: fadeIn ease 5s;
+    }
+}
+
+@media (min-width: 1201px) {
+.fade-in {
+    font-size: 23px;
+    left: 5px;
+    animation: fadeIn ease 5s;
+    -webkit-animation: fadeIn ease 5s;
+    -moz-animation: fadeIn ease 5s;
+    -o-animation: fadeIn ease 5s;
+    -ms-animation: fadeIn ease 5s;
+}
+}
+
+    
+@keyframes fadeIn {
+0% {
+    opacity:0;
+}
+80% {
+    opacity:0;
+}
+100% {
+    opacity:1;
+}
+}
+
+@-moz-keyframes fadeIn {
+    0% {
+        opacity:0;
+    }
+    80% {
+        opacity:0;
+    }
+    100% {
+        opacity:1;
+    }
+}
+
+@-webkit-keyframes fadeIn {
+    0% {
+        opacity:0;
+    }
+    80% {
+        opacity:0;
+    }
+    100% {
+        opacity:1;
+    }
+}
+
+@-o-keyframes fadeIn {
+    0% {
+        opacity:0;
+    }
+    80% {
+        opacity:0;
+    }
+    100% {
+        opacity:1;
+    }
+}
+
+@-ms-keyframes fadeIn {
+    0% {
+        opacity:0;
+    }
+    80% {
+        opacity:0;
+    }
+    100% {
+        opacity:1;
+    }
+}
+
+
+
+
+@media (max-width: 600px) {
+    .connectWalletButton {
+        display: block;
+        margin: auto;
+        height: 40px;
+        width: 80%;
+    }
+  }
+
+  @media (min-width: 601px) and (max-width: 1200px) {
+    .connectWalletButton {
+        display: block;
+        margin: auto;
+        height: 30px;
+        width: 60%;
+    }
+  }
+
+  @media (min-width: 1201px) {
+    .connectWalletButton {
+        display: block;
+        margin: auto;
+        height: 40px;
+        width: 40%;
+    }
+  }
+
+
+
+  @media (max-width: 600px) {
+    .mainTitle {
+      font-size: 25px;
+    }
+  }
+
+  @media (min-width: 601px) and (max-width: 1200px) {
+    .mainTitle {
+      font-size: 30px;
+    }
+  }
+
+  @media (min-width: 1201px) {
+    .mainTitle {
+      font-size: 35px;
+    }
+  }
+
+
+  @media (max-width: 600px) {
+    .tripleDashSlogan {
+      font-size: 14px;
+    }
+  }
+
+  @media (min-width: 601px) and (max-width: 1200px) {
+    .tripleDashSlogan {
+      font-size: 16px;
+    }
+  }
+
+  @media (min-width: 1201px) {
+    .tripleDashSlogan {
+      font-size: 18px;
+    }
+  }
+
+
+  @media (max-width: 600px) {
+    .OurGoal {
+      font-size: 14px;
+    }
+  }
+
+  @media (min-width: 601px) and (max-width: 1200px) {
+    .OurGoal {
+      font-size: 25px;
+    }
+  }
+
+  @media (min-width: 1201px) {
+    .OurGoal {
+      font-size: 55px;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .OurGoalText {
+      font-size: 14px;
+    }
+  }
+
+  @media (min-width: 601px) and (max-width: 1200px) {
+    .OurGoalText {
+      font-size: 20px;
+    }
+  }
+
+  @media (min-width: 1201px) {
+    .OurGoalText {
+      font-size: 45px;
+    }
+  }
+
+
+
+
+  @media (max-width: 600px) {
+    .OurMethod {
+      font-size: 14px;
+    }
+  }
+
+  @media (min-width: 601px) and (max-width: 1200px) {
+    .OurMethod {
+      font-size: 25px;
+    }
+  }
+
+  @media (min-width: 1201px) {
+    .OurMethod {
+      font-size: 55px;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .OurMethodText {
+      font-size: 14px;
+    }
+  }
+
+  @media (min-width: 601px) and (max-width: 1200px) {
+    .OurMethodText {
+      font-size: 20px;
+    }
+  }
+
+  @media (min-width: 1201px) {
+    .OurMethodText {
+      font-size: 45px;
+    }
+  }
+
+
+  @media (max-width: 600px) {
+    .PlatformFeatures {
+      font-size: 14px;
+    }
+  }
+
+  @media (min-width: 601px) and (max-width: 1200px) {
+    .PlatformFeatures {
+      font-size: 25px;
+    }
+  }
+
+  @media (min-width: 1201px) {
+    .PlatformFeatures {
+      font-size: 55px;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .PlatformFeaturesText {
+      font-size: 14px;
+    }
+  }
+
+  @media (min-width: 601px) and (max-width: 1200px) {
+    .PlatformFeaturesText {
+      font-size: 20px;
+    }
+  }
+
+  @media (min-width: 1201px) {
+    .PlatformFeaturesText {
+      font-size: 45px;
+    }
+  }

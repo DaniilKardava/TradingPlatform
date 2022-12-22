@@ -1,0 +1,193 @@
+
+@media (max-width: 600px){
+    /* Searchbox*/
+    #searchBox {
+        margin-top: 5vw;
+        margin-left: 5vw;
+        height: 3vw;
+        width: 25vw;
+    }
+    #searchBox:placeholder-shown {
+        font-size: 1vw;
+    }
+
+    /* Title */
+    #tradeTitle{
+        margin-top: 5vw;
+        margin-left: 15vw;
+        font-size: 8vw;
+        color:orange;
+    }
+}
+
+@media (min-width: 601px) and (max-width: 700px){
+    /* Searchbox*/
+    #searchBox {
+        margin-left: 5vw;
+        height: 3.5vw;
+        width: 25vw;
+    }
+    #searchBox:placeholder-shown {
+        font-size: 1vw;
+    }
+
+    /* Search results*/
+    .searchResults {
+        margin-left: 5vw;
+        height: 2.5vw;
+        width: 25vw;
+    }
+
+    /* Title */
+    #tradeTitle{
+        margin-left: 15vw;
+        font-size: 8vw;
+        color:yellow;
+    }
+}
+
+/* Below 700 should be mobile layout*/ 
+
+@media (min-width: 1401px){
+    #searchBox {
+        margin-left: 5vw;
+        height: 2.5vw;
+        width: 20vw;
+        font-size: 1.3vw;
+        border: 2px solid rgb(255, 255, 255) ;
+    }
+    #searchBox:placeholder-shown {
+        font-size: 1.3vw;
+    }
+
+    /* Search results*/
+    .searchResults {
+        margin-left: 5vw;
+        height: 1.5vw;
+        width: 20vw;
+        color:black;
+        font-size: 1vw;
+        text-align: left;
+        border: 0px solid black;
+    }
+
+    #tradeTitle{
+        margin-left: 20vw;
+        font-size: 7vw;
+        color:red;
+    }
+
+    #firstRow{
+        margin-top: 0vw;
+    }
+
+    #secondRow {
+        margin-top: -5vw;
+    }
+
+    #executionBox{
+        padding:1vw;
+        color:rgb(255, 255, 255);
+        background-color: rgb(0, 0, 0);
+        position:relative;
+        left: 5vw;
+        width:20vw;
+    }
+
+    #executionBoxInformation {
+        font-size: 2vw;
+    }
+
+    #tradeExecutionButtonsDiv{
+        position:relative;
+        margin-top:2vw;
+    }
+
+    #orderTypeTitle{
+        font-size: 2vw;
+
+    }
+
+    #orderSelect{
+        font-size: 1.5vw;
+    }
+
+    #qtyFormDiv{
+        margin-top:1vw;
+    }
+
+    #QTYtitle{
+        font-size: 2vw;
+    }
+
+    #QTY {
+        position:relative;
+        padding-left: .5vw;
+        font-size: 1.5vw;
+        height: 2vw;
+        width: 85%;
+    }
+
+    #lmtPriceFormDiv {
+        margin-top:1.5vw;
+    }
+
+    #lmtPriceTitle {
+        font-size: 2vw;
+    }
+
+    #lmtPriceInput {
+        position:relative;
+        padding-left: .5vw;
+        font-size: 1.5vw;
+        height: 2vw;
+        width: 85%;
+
+    }
+
+    #buy_sell_Buttons {
+        margin-top:1.5vw;
+    }
+
+    #buyButton {
+        background-color: rgba(0,255,0,.4);
+        height:3.3vw;
+        width: 10vw; 
+        color: white;
+        font-size: 2vw;
+        margin:auto;
+        justify-content: center;
+        border:1px solid black;
+    }
+
+    #sellButton {
+        background-color: rgba(255,0,0,.7);
+        height:3.3vw;
+        width: 10vw; 
+        color: white;
+        font-size: 2vw;
+        margin:auto;
+        justify-content: center; 
+        border: 1px solid black;
+    }
+
+    #orderButtonDiv {
+        margin-top:1.5vw;
+    }
+
+    #stopLoss_takeProfit {
+        background-color: rgb(117, 191, 240); 
+        height:3.3vw; 
+        width: 20vw; 
+        color: rgb(0, 0, 0);
+        font-size: 2vw;
+    }
+
+    #liveChart {
+        position: relative;
+        left:11vw; 
+        height: 30vw; 
+        width:65vw;
+    }
+}
+
