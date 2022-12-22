@@ -19,7 +19,7 @@ user who placed in the top 10%, and then award the proportional amount of the re
 <br/>
 <br/>
 Deposits should be made to a public ethereum contract in a stable coin (tbd). Contract checks that the user is depositing min of 50 usd and that user has not 
-yet made a deposit for this season. Then stores user address and funds deposited. The rest depends on the efficiency of the blockchain we choose... either 
+yet made a deposit for this season. Then stores user address and funds deposited. The rest depends on the efficiency of the blockchain we choose... the first option: 
 an authorized wallet will change the state of the winners variable at the end of the season, at which point the profits will be redistributed to those in 
 the list, and the contract will reset (the protocol itself keeps a percent). This makes for minimum blockchain transactions and minimum gas fees. 
 The ideal alternative is for all buy/sell transactions to be logged on the blockchain, and for the leaderboard to be calculated on the blockchain based on the 
