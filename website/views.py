@@ -3,11 +3,11 @@ from .models import Wallet
 from . import db
 from .marketOrderFunction import marketOrder
 
+# Defines a blueprint, a way to organize endpoints
 views = Blueprint("views", __name__, )
 
-# When we go to the / route from our homepage, we will run the following code
 
-
+# Below are endpoints that a user can reach, and the function that is to be executed when that happens.
 @views.route("/", methods=["POST", "GET"])
 def home():
     return render_template("onboarding.html")
@@ -28,27 +28,27 @@ def tradeStation():
     global assetList
     global assetName
     global timeframe
-    # First time initialization
 
     if request.method == "POST":
+        # Get list of keys from the key:value pairs that come with the request. Use them to check the origin of the request.
         requestArguments = list(request.form)
 
-        # Check if the post request is for the chart timeframe
+        # Check if the post request matches the format that comes from the html form that is connected to chart timeframe buttons.
         if requestArguments[0] in ["1mTimeFrame", "5mTimeFrame", "15mTimeFrame", "1hTimeFrame", "6hTimeFrame", "1dTimeFrame"]:
             timeframe = requestArguments[0]
-            print(timeframe)
 
-        # Checking source of post request and how to appropriately handle
         if "assetSearchRequest" in requestArguments:
             assetName = requestArguments[1]
 
-        # Buy / Sell market request
+        # Buy / Sell market order request
         if "QTY" in requestArguments:
             marketOrder(requestArguments, request, Wallet, db)
-
+            
+    # Variables can be passed to the html to display cutom values.
     return render_template("tradeStation.html", assetName=assetName, assetList=assetList, timeframe=timeframe)
 
 
+# End point to check if user already exists.
 @ views.route('/check-user')
 def check_user():
     wallet_address = request.args.get('wallet_address')
@@ -58,18 +58,17 @@ def check_user():
     else:
         return {'exists': False}
 
-
+# End point to add a user. 
 @ views.route('/add-user')
 def add_user():
 
     wallet_address = request.args.get('wallet_address')
     cashAmount = request.args.get('cashAmount')
-    assetsOwned = (request.args.get('assetsOwned'))
-    transactionsMade = (request.args.get('transactionsMade'))
-    portfolioHistory = (request.args.get('portfolioHistory'))
+    assetsOwned = request.args.get('assetsOwned')
+    transactionsMade = request.args.get('transactionsMade')
+    portfolioHistory = request.args.get('portfolioHistory')
     dateCreated = request.args.get('dateCreated')
 
-    print(portfolioHistory)
     user = Wallet(wallet_address=wallet_address, cash_amount=cashAmount, asset_amounts=assetsOwned,
                   transaction_history=transactionsMade, portfolio_history=portfolioHistory, date_created=dateCreated)
 
@@ -81,7 +80,7 @@ def add_user():
     except:
         return {'success': False}
 
-
+# End point to get user info and display it on the page.
 @ views.route('/get-user-info')
 def get_user_info():
     walletAddress = request.args.get("wallet_address")
