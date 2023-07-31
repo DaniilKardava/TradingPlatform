@@ -1,3 +1,7 @@
+Dead project, markets are efficient, this has too many holes. 
+
+</br>
+
 Traditional financial markets have little room for creative approaches. When market participants transact, buyer and sellers must meet at a common price. 
 Without getting too technical, institutions give retail traders the ability to transact instantly by charging them premiums in the form of bid/ask spreads,
 a built in fee that is nearly impossible to overcome for frequent traders.
